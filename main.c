@@ -1,5 +1,4 @@
 #include "monty.h"
-#include "controller.c"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -28,7 +27,7 @@ char line[256];
 char *delim = " ";
 const char *cmd[10] = {"push", "pall", "pop", "add", "swap",
 "sub", "nop", "div", "mul", "mod"};
-char *fname, *cpush = "push\0";
+char *fname;
 int param;
 stack_t *head = NULL;
 while (fgets(line, 256, file))
