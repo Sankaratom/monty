@@ -8,12 +8,18 @@
 *@n: integer to be stored in the stack
 *Return - a new head to the stack
 */
-stack_t *push(stack_t **head, int n)
+stack_t *push(stack_t **head, int n, int ln)
 {
 stack_t *new = malloc(sizeof(stack_t));
 if (new == NULL)
 {
+printf("Error: malloc failed\n");
 EXIT_FAILURE;
+}
+if (!n)
+{
+printf("L<%d>: usage: push integer\n", ln);
+exit(EXIT_FAILURE);
 }
 new->n = n;
 new->next = NULL;
@@ -74,4 +80,28 @@ else
 {
 exit(EXIT_FAILURE);
 }
+}
+/**
+* swap - prints all elements of the stack popping them off as it does
+* @head: head of the list // top of the stack
+* @ln: line number
+* Return: success or failure status
+*/
+stack_t *swap(stack_t **head, int ln)
+{
+if (*head == NULL)
+{
+exit(EXIT_FAILURE);
+}
+if((*head)->next == NULL)
+{
+printf("L<%d>: can't swap, stack too short", ln);
+exit(EXIT_FAILURE);
+}
+int temp = (*head)->n;
+temp = (*head)->n;
+(*head)->n = (*head)->next->n;
+(*head)->n = temp;
+return *head;
+exit(EXIT_SUCCESS);
 }

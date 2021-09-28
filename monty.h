@@ -42,8 +42,9 @@ void (*f)(stack_t **stack, unsigned int line_number);
 
 #ifndef PUSH
 #define PUSH
-stack_t *push(stack_t **head, int n);
+stack_t *push(stack_t **head, int n, int ln);
 stack_t *pop(stack_t **head);
+stack_t *swap(stack_t **head, int ln);
 #endif
 #ifndef FSWITCH
 #define FSWITCH

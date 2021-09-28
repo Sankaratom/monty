@@ -25,18 +25,27 @@ exit(EXIT_FAILURE);
 }
 char line[256];
 char *delim = " ";
-const char *cmd[10] = {"push", "pall", "pop", "add", "swap",
+char *cmd[10] = {"push", "pall", "pop", "add", "swap",
 "sub", "nop", "div", "mul", "mod"};
 char *fname;
-int param;
+int param, ln = 1;
 stack_t *head = NULL;
 while (fgets(line, 256, file))
 {
 fname = strtok(line, delim);
+if (fname[strlen(fname) - 1] == '\n'){
+fname [strlen(fname) - 1] = '\0';
+}
 if (!strcmp(cmd[0], fname))
 {
 param = atoi(strtok(NULL, line));
-push(&head, param);
+if (param)
+{
+push(&head, param, ln);
+}
+else {
+exit(EXIT_FAILURE);
+}
 }
 if (!strcmp(cmd[1], fname))
 {
@@ -46,6 +55,14 @@ if (fname == cmd[2])
 {
 pop(&head);
 }
+if (!strcmp(cmd[4], fname))
+{
+swap(&head, ln);
+}
+ln++;
 }
 fclose(file);
+free(fname);
+free(*cmd);
+free(delim);
 }
