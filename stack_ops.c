@@ -1,5 +1,4 @@
 #include "monty.h"
-#include "helpers.c"
 /**
 *push - pushes an element to the stack
 *@head: head of the structure that makes up the stack
@@ -87,6 +86,7 @@ pop(head, ln);
 */
 stack_t *swap(stack_t **head, int ln)
 {
+int temp;
 if (*head == NULL)
 {
 exit(EXIT_FAILURE);
@@ -96,7 +96,7 @@ if ((*head)->next == NULL)
 printf("L<%d>: can't swap, stack too short\n", ln);
 exit(EXIT_FAILURE);
 }
-int temp = (*head)->n;
+temp = (*head)->n;
 temp = (*head)->n;
 (*head)->n = (*head)->next->n;
 (*head)->next->n = temp;

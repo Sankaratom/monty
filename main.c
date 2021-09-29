@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "stack_ops.c"
 
 
 /**
@@ -13,20 +12,25 @@
 */
 int main(int argc, char *argv[])
 {
-if (argv[1] == NULL)
+FILE *file;
+char line[256];
+char *delim = " ", *fname, *par;
+int ln = 1;
+stack_t *head;
+if (argc < 2)
 {
 printf("USAGE: monty file\n");
 exit(EXIT_FAILURE);
 }
-FILE *file = fopen(argv[1], "r");
+file = fopen(argv[1], "r");
 if (file == NULL)
 {
 printf("Error: Can't open file <file>\n");
 exit(EXIT_FAILURE);
 }
-char line[256], *delim = " ", *fname, *par;
-int ln = 1;
-stack_t *head = NULL;
+
+
+head = NULL;
 while (fgets(line, 256, file))
 {
 fname = strtok(line, delim);
@@ -50,4 +54,5 @@ if (!strcmp("swap", fname))
 ln++;
 }
 fclose(file), free(fname), free(delim);
+return (0);
 }

@@ -9,7 +9,7 @@
 int isnum(char *str)
 {
 int i;
-for (int i = 0; str[i]; i++)
+for (i = 0; str[i]; i++)
 {
 if (isdigit(str[i]))
 {
