@@ -1,7 +1,10 @@
 #ifndef LIBC
 #define LIBC
+#include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
+#include <stddef.h>
 #endif
 #ifndef STACK_S
 #define STACK_S
@@ -42,9 +45,11 @@ void (*f)(stack_t **stack, unsigned int line_number);
 
 #ifndef PUSH
 #define PUSH
-stack_t *push(stack_t **head, int n, int ln);
-stack_t *pop(stack_t **head);
+stack_t *push(stack_t **head, char *n, int ln);
+stack_t *pop(stack_t **head, int ln);
 stack_t *swap(stack_t **head, int ln);
+void pall(stack_t **head, int ln);
+int isnum(char *str);
 #endif
 #ifndef FSWITCH
 #define FSWITCH

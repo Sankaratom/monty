@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include "stack_ops.c"
+
+
 /**
 * main - our monty interpreter
 * @argc : number of arguments
@@ -17,52 +19,35 @@ printf("USAGE: monty file\n");
 exit(EXIT_FAILURE);
 }
 FILE *file = fopen(argv[1], "r");
-
 if (file == NULL)
 {
 printf("Error: Can't open file <file>\n");
 exit(EXIT_FAILURE);
 }
-char line[256];
-char *delim = " ";
-char *cmd[10] = {"push", "pall", "pop", "add", "swap",
-"sub", "nop", "div", "mul", "mod"};
-char *fname;
-int param, ln = 1;
+char line[256], *delim = " ", *fname, *par;
+int ln = 1;
 stack_t *head = NULL;
 while (fgets(line, 256, file))
 {
 fname = strtok(line, delim);
-if (fname[strlen(fname) - 1] == '\n'){
-fname [strlen(fname) - 1] = '\0';
-}
-if (!strcmp(cmd[0], fname))
+if (fname[strlen(fname) - 1] == '\n')
+    fname [strlen(fname) - 1] = '\0';
+if (!strcmp("push", fname))
 {
-param = atoi(strtok(NULL, line));
-if (param)
-{
-push(&head, param, ln);
+par = strtok(NULL, line);
+if (par != NULL)
+    par[strlen(par) - 1] = '\0';
+else
+    par = NULL;
+push(&head, par, ln);
 }
-else {
-exit(EXIT_FAILURE);
-}
-}
-if (!strcmp(cmd[1], fname))
-{
-pall(&head);
-}
-if (fname == cmd[2])
-{
-pop(&head);
-}
-if (!strcmp(cmd[4], fname))
-{
-swap(&head, ln);
-}
+if (!strcmp("pall", fname))
+    pall(&head, ln);
+if (!strcmp("pop", fname))
+    pop(&head, ln);
+if (!strcmp("swap", fname))
+    swap(&head, ln);
 ln++;
 }
-fclose(file);
-free(fname);
-free(*cmd);
-free(delim);
+fclose(file), free(fname), free(delim);
 }
